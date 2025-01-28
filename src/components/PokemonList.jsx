@@ -10,8 +10,12 @@ function PokemonList() {
         <div className="flex flex-col items-center py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full px-4 max-w-7xl">
                 {pokemonListState.loading ? (
-                    <div className="col-span-full text-center text-xl text-gray-600">
-                        Loading...
+                    <div className="col-span-full text-center text-xl text-gray-600 py-12">
+                        <div className="animate-pulse flex space-x-4">
+                            <div className="flex-1 space-y-6 py-1">
+                                Loading...
+                            </div>
+                        </div>
                     </div>
                 ) : (
                     pokemonListState.pokemonList.map((p) => (
