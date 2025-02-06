@@ -20,15 +20,9 @@ function PokemonDetails({ pokemonName }) {
             <div className="text-center text-xl text-gray-600 py-12">
                 <div className="inline-flex items-center justify-center space-x-1 text-2xl font-semibold">
                     Loading &nbsp;
-                    <span className="animate-[dots_1.5s_steps(3)_infinite]">
-                        .
-                    </span>
-                    <span className="animate-[dots_1.5s_steps(3)_infinite_0.5s]">
-                        .
-                    </span>
-                    <span className="animate-[dots_1.5s_steps(3)_infinite_1s]">
-                        .
-                    </span>
+                    <span className="animate-[dots_1.5s_steps(3)_infinite]">.</span>
+                    <span className="animate-[dots_1.5s_steps(3)_infinite_0.5s]">.</span>
+                    <span className="animate-[dots_1.5s_steps(3)_infinite_1s]">.</span>
                 </div>
             </div>
         );
@@ -69,21 +63,22 @@ function PokemonDetails({ pokemonName }) {
 
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 w-full">
-            <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-[50%] min-w-fit">
-                <div className={`${typeColors[types[0]]} p-6`}>
+            <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full max-w-screen-md lg:max-w-screen-lg">
+                {/* Header Section */}
+                <div className={`${typeColors[types[0]]} p-4 md:p-6`}>
                     <div className="flex justify-between items-center">
-                        <h1 className="text-4xl font-bold text-white capitalize">
+                        <h1 className="text-3xl md:text-4xl font-bold text-white capitalize">
                             {name}
                         </h1>
-                        <span className="bg-white/20 text-white px-4 py-2 rounded-full text-lg">
+                        <span className="bg-white/20 text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-sm md:text-lg">
                             #{String(pokemonId).padStart(3, "0")}
                         </span>
                     </div>
-                    <div className="mt-4 flex gap-2">
+                    <div className="mt-2 md:mt-4 flex gap-1 md:gap-2">
                         {types.map((type) => (
                             <span
                                 key={type}
-                                className={`${typeColors[type]} text-white px-4 py-2 rounded-full text-sm font-semibold capitalize shadow-sm shadow-black`}
+                                className={`${typeColors[type]} text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold capitalize shadow-sm shadow-black`}
                             >
                                 {type}
                             </span>
@@ -91,21 +86,27 @@ function PokemonDetails({ pokemonName }) {
                     </div>
                 </div>
 
-                <div className="p-8 bg-gray-50">
-                    <img src={image} alt={name} className="mx-auto w-64 h-64" />
+                {/* Image Section */}
+                <div className="p-4 md:p-8 bg-gray-50">
+                    <img
+                        src={image}
+                        alt={name}
+                        className="mx-auto w-48 h-48 md:w-64 md:h-64"
+                    />
                 </div>
 
-                <div className="p-6 space-y-8">
+                {/* Stats Section */}
+                <div className="p-4 md:p-6 space-y-6 md:space-y-8">
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">
                             <LuSword className="inline mr-2 text-orange-500" />
                             Base Stats
                         </h2>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                             {baseStats.map((stat) => (
                                 <div
                                     key={stat.name}
-                                    className="p-3 bg-gray-100 rounded-xl"
+                                    className="p-2 md:p-3 bg-gray-100 rounded-xl"
                                 >
                                     <div className="flex items-center gap-4">
                                         <div className="text-2xl text-gray-600">
@@ -114,12 +115,8 @@ function PokemonDetails({ pokemonName }) {
                                                     hp: <FaHeartbeat />,
                                                     attack: <LuSword />,
                                                     defense: <FaShieldAlt />,
-                                                    "special-attack": (
-                                                        <FaFire />
-                                                    ),
-                                                    "special-defense": (
-                                                        <FaShieldAlt />
-                                                    ),
+                                                    "special-attack": <FaFire />,
+                                                    "special-defense": <FaShieldAlt />,
                                                     speed: <FaBolt />,
                                                 }[stat.name]
                                             }
@@ -137,10 +134,7 @@ function PokemonDetails({ pokemonName }) {
                                                 <div
                                                     className="h-full rounded-full bg-orange-400"
                                                     style={{
-                                                        width: `${
-                                                            (stat.value / 150) *
-                                                            100
-                                                        }%`,
+                                                        width: `${(stat.value / 150) * 100}%`,
                                                     }}
                                                 />
                                             </div>
@@ -151,16 +145,17 @@ function PokemonDetails({ pokemonName }) {
                         </div>
                     </div>
 
+                    {/* Abilities Section */}
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">
                             <FaStar className="inline mr-2 text-yellow-500" />
                             Abilities
                         </h2>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                             {abilities.map((ability) => (
                                 <div
                                     key={ability.name}
-                                    className="p-4 bg-white rounded-xl border border-gray-200"
+                                    className="p-3 md:p-4 bg-white rounded-xl border border-gray-200"
                                 >
                                     <div className="flex flex-wrap justify-between items-center">
                                         <span className="font-medium text-gray-700 capitalize">
@@ -177,6 +172,7 @@ function PokemonDetails({ pokemonName }) {
                         </div>
                     </div>
 
+                    {/* Attributes Section */}
                     <div className="bg-gray-100 rounded-xl p-6">
                         <h2 className="text-2xl font-bold text-gray-800 mb-6">
                             <FaRuler className="inline mr-2 text-blue-500" />
